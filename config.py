@@ -1,0 +1,6 @@
+CONTROL_PROCESSOR_HOST = ''
+LIVING_ROOM_PANEL_IPID = 0x00
+BEDROOM_PANEL_IPID = 0x00
+JOIN_DICT = {
+    'some_join_name' : 0,
+    }

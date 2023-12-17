@@ -1,0 +1,26 @@
+{% extends "layout/page.html" %}
+{% block title %}Living Room{% endblock %}
+{% block content %}
+  <h1>Living Room</h1>
+  <p class="important">
+    Welcome to the living room!
+<div class='container'>
+    <h3>Source Select</h3>
+            <button class='btn btn-primary btn-lg active' id='chromecast_source_select' onClick="reply_click(this.id)">Chromecast</button>
+            <button class='btn btn-primary btn-lg active' id='apple_tv_source_select' onClick="reply_click(this.id)">Apple TV</button>
+            <button class='btn btn-primary btn-lg active' id='server_source_select' onClick="reply_click(this.id)">Server</button>
+            <button class='btn btn-primary btn-lg active' id='sarah_pc_source_select' onClick="reply_click(this.id)">Sarah's PC</button>
+            <button class='btn btn-primary btn-lg active' id='switch_source_select' onClick="reply_click(this.id)">Switch</button>
+    <h3>Volume Control</h3>
+            <button class='btn btn-primary btn-lg active' id='soundbar_vol_mute' onClick="reply_click(this.id)">Mute</button>
+            <button class='btn btn-primary btn-lg active' id='soundbar_vol_up' onClick="reply_click(this.id)">Vol Up</button>
+            <button class='btn btn-primary btn-lg active' id='soundbar_vol_down' onClick="reply_click(this.id)">Vol Down</button>
+
+</div>
+<script type=text/javascript>
+function reply_click(clicked_id)
+  {
+      $.post("/join_handler?button=" + clicked_id);
+  }
+</script>
+{% endblock %}
