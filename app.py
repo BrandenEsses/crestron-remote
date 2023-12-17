@@ -38,8 +38,15 @@ def bedroom():
 @app.route('/join_handler', methods = ['POST'])
 def join_handler():
     button_data = request.args.get("button")
+    if "adb" in button_data:
+        if "vol_up" in button_data:
+            response = device.shell('input keyevent "KEYCODE_VOLUME_UP"')
+        if "vol_down" in button_data:
+            response = device.shell('input keyevent "KEYCODE_VOLUME_DOWN"')
+        if "vol_mute" in button_data:
+            response = device.shell('input keyevent "KEYCODE_VOLUME_MUTE"')
+        return ("nothing")
     if 'source_select' in button_data and not living_room_cip.get("d",59):
-        # Turn the chromecast on with the system
         response = device.shell('input keyevent "KEYCODE_POWER"')
         time.sleep(0.25)
     button_join = JOIN_DICT[button_data]
