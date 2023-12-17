@@ -2,21 +2,89 @@
 {% block title %}Living Room{% endblock %}
 {% block content %}
   <h1>Living Room</h1>
-  <p class="important">
-    Welcome to the living room!
-<div class='container'>
+<div class='container-fluid shadow-lg p-3 mb-5 bg-white rounded'>
     <h3>Source Select</h3>
             <button class='btn btn-primary btn-lg active' id='chromecast_source_select' onClick="reply_click(this.id)">Chromecast</button>
             <button class='btn btn-primary btn-lg active' id='apple_tv_source_select' onClick="reply_click(this.id)">Apple TV</button>
+            <button class='btn btn-primary btn-lg active' id='branden_desktop_source_select' onClick="reply_click(this.id)">Branden's PC</button>
             <button class='btn btn-primary btn-lg active' id='server_source_select' onClick="reply_click(this.id)">Server</button>
             <button class='btn btn-primary btn-lg active' id='sarah_pc_source_select' onClick="reply_click(this.id)">Sarah's PC</button>
             <button class='btn btn-primary btn-lg active' id='switch_source_select' onClick="reply_click(this.id)">Switch</button>
     <h3>Volume Control</h3>
-            <button class='btn btn-primary btn-lg active' id='soundbar_vol_mute' onClick="reply_click(this.id)">Mute</button>
-            <button class='btn btn-primary btn-lg active' id='soundbar_vol_up' onClick="reply_click(this.id)">Vol Up</button>
-            <button class='btn btn-primary btn-lg active' id='soundbar_vol_down' onClick="reply_click(this.id)">Vol Down</button>
+            <button class='btn btn-primary btn-lg active' id='soundbar_vol_mute' onClick="reply_click(this.id)"><i class="bi bi-volume-mute-fill"></i></button>
+            <button class='btn btn-primary btn-lg active' id='soundbar_vol_down' onClick="reply_click(this.id)"><i class="bi bi-volume-down-fill"></i></button>
+            <button class='btn btn-primary btn-lg active' id='soundbar_vol_up' onClick="reply_click(this.id)"><i class="bi bi-volume-up-fill"></i></button>
+<h3>Control Panels</h3>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#chromecastModal">
+  Chromecast Controls
+</button>
 
+<div class="modal fade" id="chromecastModal" tabindex="-1" role="dialog" aria-labelledby="chromecastModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="chromecastModalLabel">Chromecast Controls</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+            <button class='btn btn-primary btn-lg active' id='chromecast_home' onClick="reply_click(this.id)"><i class="bi bi-house-fill"></i></button>
+            <button class='btn btn-primary btn-lg active' id='chromecast_play_pause' onClick="reply_click(this.id)"><i class="bi bi-play-fill"></i><i class="bi bi-pause-fill"></i></button>
+            <button class='btn btn-primary btn-lg active' id='chromecast_stop' onClick="reply_click(this.id)"><i class="bi bi-stop-fill"></i></button>
+          <br>
+          <hr/>
+            <button class='btn btn-primary btn-lg active' id='chromecast_up' onClick="reply_click(this.id)"><i class="bi bi-arrow-up"></i></button>
+            <br>
+            <button class='btn btn-primary btn-lg active' id='chromecast_left' onClick="reply_click(this.id)"><i class="bi bi-arrow-left"></i></button>
+            <button class='btn btn-primary btn-lg active' id='chromecast_select' onClick="reply_click(this.id)"><i class="bi bi-record-fill"></i></button>
+            <button class='btn btn-primary btn-lg active' id='chromecast_right' onClick="reply_click(this.id)"><i class="bi bi-arrow-right"></i></button>
+            <br>
+            <button class='btn btn-primary btn-lg active' id='chromecast_down' onClick="reply_click(this.id)"><i class="bi bi-arrow-down"></i></button>
+          <br>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#appleTVModal">
+  Apple TV Controls
+</button>
+
+<div class="modal fade" id="appleTVModal" tabindex="-1" role="dialog" aria-labelledby="appleTVModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="appleTVModalLabel">Apple TV Controls</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+            <button class='btn btn-primary btn-lg active' id='apple_tv_menu' onClick="reply_click(this.id)">Menu</button>
+            <button class='btn btn-primary btn-lg active' id='apple_tv_tv' onClick="reply_click(this.id)"><i class="bi bi-tv"></i></button>
+            <button class='btn btn-primary btn-lg active' id='apple_tv_play_pause' onClick="reply_click(this.id)"><i class="bi bi-play-fill"></i><i class="bi bi-pause-fill"></i></button>
+          <br>
+          <hr/>
+            <button class='btn btn-primary btn-lg active' id='apple_tv_up' onClick="reply_click(this.id)"><i class="bi bi-arrow-up"></i></button>
+          <br>
+            <button class='btn btn-primary btn-lg active' id='apple_tv_left' onClick="reply_click(this.id)"><i class="bi bi-arrow-left"></i></button>
+            <button class='btn btn-primary btn-lg active' id='apple_tv_select' onClick="reply_click(this.id)"><i class="bi bi-record-fill"></i></button>
+            <button class='btn btn-primary btn-lg active' id='apple_tv_right' onClick="reply_click(this.id)"><i class="bi bi-arrow-right"></i></button>
+          <br>
+            <button class='btn btn-primary btn-lg active' id='apple_tv_down' onClick="reply_click(this.id)"><i class="bi bi-arrow-down"></i></button>
+          <br>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
 <script type=text/javascript>
 function reply_click(clicked_id)
   {
