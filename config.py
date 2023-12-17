@@ -1,6 +1,9 @@
 CONTROL_PROCESSOR_HOST = ''
+CHROMECAST_IP = ''
+ADB_KEY_PATH = ''
+CHROMECAST_ADB_PORT = 0
 LIVING_ROOM_PANEL_IPID = 0x00
 BEDROOM_PANEL_IPID = 0x00
 JOIN_DICT = {
-    'some_join_name' : 0,
-    }
+    'sample_join_name' : 0,
+}

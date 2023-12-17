@@ -1,14 +1,27 @@
 from flask import Flask, render_template, request
-import cipclient,time
-from config import CONTROL_PROCESSOR_HOST, LIVING_ROOM_PANEL_IPID, BEDROOM_PANEL_IPID, JOIN_DICT
+import cipclient,time,os
+from config import CONTROL_PROCESSOR_HOST, LIVING_ROOM_PANEL_IPID, BEDROOM_PANEL_IPID, JOIN_DICT, CHROMECAST_IP, CHROMECAST_ADB_PORT, ADB_KEY_PATH
+from adb_shell.adb_device import AdbDeviceTcp
+from adb_shell.auth.sign_pythonrsa import PythonRSASigner
+from adb_shell.auth.keygen import keygen
 
 app = Flask(__name__, template_folder='templates')
 
 with app.app_context():
     global living_room_cip
+    global device
+    if not os.path.isfile(ADB_KEY_PATH):
+        keygen(ADB_KEY_PATH)
     living_room_cip = cipclient.CIPSocketClient(CONTROL_PROCESSOR_HOST, LIVING_ROOM_PANEL_IPID)
     living_room_cip.start()
     time.sleep(1.5)
+    with open(ADB_KEY_PATH) as f:
+        priv = f.read()
+    with open(ADB_KEY_PATH + '.pub') as f:
+        pub = f.read()
+    signer = PythonRSASigner(pub, priv)
+    device = AdbDeviceTcp(CHROMECAST_IP, CHROMECAST_ADB_PORT, default_transport_timeout_s=9.)
+    device.connect(rsa_keys=[signer], auth_timeout_s=0.1)
 
 @app.route('/')
 def index():
@@ -25,6 +38,10 @@ def bedroom():
 @app.route('/join_handler', methods = ['POST'])
 def join_handler():
     button_data = request.args.get("button")
+    if 'source_select' in button_data and not living_room_cip.get("d",59):
+        # Turn the chromecast on with the system
+        response = device.shell('input keyevent "KEYCODE_POWER"')
+        time.sleep(0.25)
     button_join = JOIN_DICT[button_data]
     living_room_cip.pulse(button_join)
     return ("nothing")
