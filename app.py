@@ -35,8 +35,8 @@ def living_room():
 def bedroom():
     return render_template('rooms/bedroom.html')
 
-@app.route('/join_handler', methods = ['POST'])
-def join_handler():
+@app.route('/living_room_join_handler', methods = ['POST'])
+def living_room_join_handler():
     button_data = request.args.get("button")
     if "adb" in button_data:
         if "vol_up" in button_data:
@@ -49,6 +49,13 @@ def join_handler():
     if 'source_select' in button_data and not living_room_cip.get("d",59):
         response = device.shell('input keyevent "KEYCODE_POWER"')
         time.sleep(0.25)
+    button_join = JOIN_DICT[button_data]
+    living_room_cip.pulse(button_join)
+    return ("nothing")
+
+@app.route('/bedroom_join_handler', methods = ['POST'])
+def bedroom_join_handler():
+    button_data = request.args.get("button")
     button_join = JOIN_DICT[button_data]
     living_room_cip.pulse(button_join)
     return ("nothing")
