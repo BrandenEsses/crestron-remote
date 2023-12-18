@@ -8,13 +8,16 @@ from samsungtvws import SamsungTVWS
 
 app = Flask(__name__, template_folder='templates')
 
-with app.app_context():
-    global living_room_cip, device, tv
-    if not os.path.isfile(ADB_KEY_PATH):
-        keygen(ADB_KEY_PATH)
+def init_crestron_connection():
+    global living_room_cip
     living_room_cip = cipclient.CIPSocketClient(CONTROL_PROCESSOR_HOST, LIVING_ROOM_PANEL_IPID)
     living_room_cip.start()
     time.sleep(1.5)
+
+def init_adb_connection():
+    global device
+    if not os.path.isfile(ADB_KEY_PATH):
+        keygen(ADB_KEY_PATH)
     with open(ADB_KEY_PATH) as f:
         priv = f.read()
     with open(ADB_KEY_PATH + '.pub') as f:
@@ -22,12 +25,18 @@ with app.app_context():
     signer = PythonRSASigner(pub, priv)
     device = AdbDeviceTcp(CHROMECAST_IP, CHROMECAST_ADB_PORT, default_transport_timeout_s=9.)
     device.connect(rsa_keys=[signer], auth_timeout_s=0.1)
-    # tv = SamsungTVWS(BEDROOM_TV_IP)
+
+def init_samsung_connection():
+    global tv
     if not os.path.isfile(BEDROOM_TV_TOKEN_FILE_PATH):
         with open(BEDROOM_TV_TOKEN_FILE_PATH, 'w') as fp:
             pass
     tv = SamsungTVWS(host=BEDROOM_TV_IP, port=BEDROOM_TV_PORT, token_file=BEDROOM_TV_TOKEN_FILE_PATH)
-    tv.shortcuts().volume_down()
+
+with app.app_context():
+    init_crestron_connection()
+    init_adb_connection()
+    init_samsung_connection()
 
 @app.route('/')
 def index():
@@ -62,23 +71,26 @@ def living_room_join_handler():
 @app.route('/bedroom_join_handler', methods = ['POST'])
 def bedroom_join_handler():
     button_data = request.args.get("button")
-    if 'bedroom_tv' in button_data:
-        if 'vol_up' in button_data:
-            tv.shortcuts().volume_up()
-        if 'vol_down' in button_data:
-            tv.shortcuts().volume_down()
-        if 'vol_mute' in button_data:
-            tv.shortcuts().mute()
-        if 'up' in button_data:
-            tv.shortcuts().up()
-        if 'down' in button_data:
-            tv.shortcuts().down()
-        if 'left' in button_data:
-            tv.shortcuts().left()
-        if 'right' in button_data:
-            tv.shortcuts().right()
-        if 'select' in button_data:
-            tv.shortcuts().enter()
+    try:
+        if 'bedroom_tv' in button_data:
+            if 'vol_up' in button_data:
+                tv.shortcuts().volume_up()
+            if 'vol_down' in button_data:
+                tv.shortcuts().volume_down()
+            if 'vol_mute' in button_data:
+                tv.shortcuts().mute()
+            if 'up' in button_data:
+                tv.shortcuts().up()
+            if 'down' in button_data:
+                tv.shortcuts().down()
+            if 'left' in button_data:
+                tv.shortcuts().left()
+            if 'right' in button_data:
+                tv.shortcuts().right()
+            if 'select' in button_data:
+                tv.shortcuts().enter()
+    except:
+        init_samsung_connection()
     button_join = JOIN_DICT[button_data]
     living_room_cip.pulse(button_join)
     return ("nothing")
