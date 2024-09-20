@@ -35,8 +35,8 @@ def init_samsung_connection():
 
 with app.app_context():
     init_crestron_connection()
-    init_adb_connection()
-    init_samsung_connection()
+    # init_adb_connection()
+    # init_samsung_connection()
 
 @app.route('/')
 def index():
