@@ -102,6 +102,71 @@
     </div>
   </div>
 
+
+  <button type="button" class="btn btn-primary btn-lg active" data-toggle="modal" data-target="#appleTVModal"> Apple TV Controls </button>
+  <div class="modal fade" id="appleTVModal" tabindex="-1" role="dialog" aria-labelledby="appleTVModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="appleTVModalLabel">Apple TV Control</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <button class='btn btn-primary btn-lg active' id='apple_tv_home' onClick="reply_click(this.id)">
+            <i class="bi bi-house-fill"></i>
+          </button>
+          <button class='btn btn-primary btn-lg active' id='apple_tv_back' onClick="reply_click(this.id)">
+            <i class="bi bi-arrow-return-left"></i>
+          </button>
+          <button class='btn btn-primary btn-lg active' id='apple_tv_play_pause' onClick="reply_click(this.id)">
+            <i class="bi bi-play-fill"></i>
+            <i class="bi bi-pause-fill"></i>
+          </button>
+          <button class='btn btn-primary btn-lg active' id='apple_tv_menu' onClick="reply_click(this.id)">
+            Menu
+          </button>
+          <br>
+          <hr/>
+          <button class='btn btn-primary btn-lg active' id='apple_tv_up' onClick="reply_click(this.id)">
+            <i class="bi bi-arrow-up"></i>
+          </button>
+          <br>
+          <button class='btn btn-primary btn-lg active' id='apple_tv_left' onClick="reply_click(this.id)">
+            <i class="bi bi-arrow-left"></i>
+          </button>
+          <button class='btn btn-primary btn-lg active' id='apple_tv_select' onClick="reply_click(this.id)">
+            <i class="bi bi-record-fill"></i>
+          </button>
+          <button class='btn btn-primary btn-lg active' id='apple_tv_right' onClick="reply_click(this.id)">
+            <i class="bi bi-arrow-right"></i>
+          </button>
+          <br>
+          <button class='btn btn-primary btn-lg active' id='apple_tv_down' onClick="reply_click(this.id)">
+            <i class="bi bi-arrow-down"></i>
+          </button>
+          <br>
+          <hr/>
+          <hr/>
+          <h6>Soundbar Volume</h6>
+          <button class='btn btn-primary btn-lg active' onClick="reply_click('soundbar_vol_mute')">
+            <i class="bi bi-volume-mute-fill"></i>
+          </button>
+          <button class='btn btn-primary btn-lg active' onClick="reply_click('soundbar_vol_down')">
+            <i class="bi bi-volume-down-fill"></i>
+          </button>
+          <button class='btn btn-primary btn-lg active' onClick="reply_click('soundbar_vol_up')">
+            <i class="bi bi-volume-up-fill"></i>
+          </button>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <button type="button" class="btn btn-primary btn-lg active" data-toggle="modal" data-target="#TVModal"> TV Controls </button>
   <div class="modal fade" id="TVModal" tabindex="-1" role="dialog" aria-labelledby="TVModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
