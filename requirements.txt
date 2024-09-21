@@ -2,3 +2,4 @@ flask
 python-cipclient
 adb-shell
 samsungtvws
+huesdk

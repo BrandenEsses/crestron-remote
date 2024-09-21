@@ -223,9 +223,21 @@
       </div>
     </div>
   </div>
+  <hr />
+  <h3>Lights</h3>
+    <button class='btn btn-primary btn-lg active' id='living_room_on' onClick="hue(this.id)">
+    On
+  </button>
+  <button class='btn btn-primary btn-lg active' id='living_room_off' onClick="hue(this.id)">
+    Off
+  </button>
+
   <script type=text/javascript>
     function reply_click(clicked_id) {
       $.post("/living_room_join_handler?button=" + clicked_id);
+    }
+    function hue(clicked_id) {
+      $.post("/hue?button=" + clicked_id);
     }
   </script>
   {% endblock %}
