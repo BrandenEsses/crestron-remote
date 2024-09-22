@@ -59,5 +59,8 @@ def hue():
         living_room_group.set_brightness(254)
     return ("nothing")
 
+@app.route('/guacamole', methods = ['GET','POST'])
+def guacamole():
+    return render_template("guacamole.html")
 if __name__ == '__main__':
     app.run()
