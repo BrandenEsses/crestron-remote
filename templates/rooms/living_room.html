@@ -28,14 +28,13 @@
   </button>
   <hr />
   <h3>Control Panels</h3>
-  <button type="button" class="btn btn-primary btn-lg active" data-toggle="modal" data-target="#chromecastModal"> Chromecast Controls </button>
+  <button type="button" class="btn btn-primary btn-lg active" data-bs-toggle="modal" data-bs-target="#chromecastModal"> Chromecast Controls </button>
   <div class="modal fade" id="chromecastModal" tabindex="-1" role="dialog" aria-labelledby="chromecastModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="chromecastModalLabel">Chromecast Controls</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           </button>
         </div>
         <div class="modal-body text-center">
@@ -81,7 +80,7 @@
             <i class="bi bi-volume-up-fill"></i>
           </button>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -89,14 +88,13 @@
   </div>
 
 
-  <button type="button" class="btn btn-primary btn-lg active" data-toggle="modal" data-target="#appleTVModal"> Apple TV Controls </button>
+  <button type="button" class="btn btn-primary btn-lg active" data-bs-toggle="modal" data-bs-target="#appleTVModal"> Apple TV Controls </button>
   <div class="modal fade" id="appleTVModal" tabindex="-1" role="dialog" aria-labelledby="appleTVModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="appleTVModalLabel">Apple TV Control</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           </button>
         </div>
         <div class="modal-body text-center">
@@ -115,6 +113,7 @@
           </button>
           <br>
           <hr/>
+          <br>
           <button class='btn btn-primary btn-lg active' id='apple_tv_up' onClick="reply_click(this.id)">
             <i class="bi bi-arrow-up"></i>
           </button>
@@ -134,7 +133,7 @@
           </button>
           <br>
           <hr/>
-          <hr/>
+          <br>
           <h6>Soundbar Volume</h6>
           <button class='btn btn-primary btn-lg active' onClick="reply_click('soundbar_vol_mute')">
             <i class="bi bi-volume-mute-fill"></i>
@@ -145,22 +144,23 @@
           <button class='btn btn-primary btn-lg active' onClick="reply_click('soundbar_vol_up')">
             <i class="bi bi-volume-up-fill"></i>
           </button>
+          <br>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <br>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-<button type="button" class="btn btn-primary btn-lg active" data-toggle="modal" data-target="#TVModal"> TV Controls </button>
+<button type="button" class="btn btn-primary btn-lg active" data-bs-toggle="modal" data-bs-target="#TVModal"> TV Controls </button>
   <div class="modal fade" id="TVModal" tabindex="-1" role="dialog" aria-labelledby="TVModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="TVModalLabel">TV Controls</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           </button>
         </div>
         <div class="modal-body text-center">
@@ -217,7 +217,7 @@
             <i class="bi bi-volume-up-fill"></i>
           </button>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
