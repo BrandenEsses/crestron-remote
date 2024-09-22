@@ -225,18 +225,25 @@
   </div>
   <hr />
   <h3>Lights</h3>
-    <button class='btn btn-primary btn-lg active' id='living_room_on' onClick="hue(this.id)">
+    <button class='btn btn-success btn-lg active' id='living_room_on' onClick="hue(this.id)">
     On
   </button>
-  <button class='btn btn-primary btn-lg active' id='living_room_off' onClick="hue(this.id)">
+  <button class='btn btn-danger btn-lg active' id='living_room_off' onClick="hue(this.id)">
     Off
   </button>
+  <br>
+  <input type="range" class="form-range" min="0" max="254" step = "1" id="brightness_range" onClick="hue(this.id, this.value)">
 
   <script type=text/javascript>
     function reply_click(clicked_id) {
       $.post("/living_room_join_handler?button=" + clicked_id);
     }
-    function hue(clicked_id) {
+    function hue(clicked_id, clicked_value) {
+      if(clicked_value)
+      {
+        $.post("/hue?brightness=" + clicked_value);
+        return;
+      }
       $.post("/hue?button=" + clicked_id);
     }
   </script>

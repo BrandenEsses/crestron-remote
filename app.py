@@ -48,10 +48,14 @@ def hue():
     for i in range(len(groups)):
         if(groups[i].name == "Living Room"):
             living_room_group = groups[i]
+    if(request.args.get("brightness")):
+        brightness = int(request.args.get("brightness"))
+        living_room_group.set_brightness(brightness)
     if(button_data=="living_room_off"):
         living_room_group.off()
     if(button_data=="living_room_on"):
         living_room_group.on()
+        living_room_group.set_color(hexa="#f5d269")
         living_room_group.set_brightness(254)
     return ("nothing")
 
