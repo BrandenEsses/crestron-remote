@@ -15,6 +15,7 @@
   <button class='btn btn-primary btn-lg active' id='chromecast_source_select' onClick="reply_click(this.id)">Chromecast</button>
   <button class='btn btn-primary btn-lg active' id='branden_desktop_source_select' onClick="reply_click(this.id)">Branden's PC</button>
   <button class='btn btn-primary btn-lg active' id='sarah_pc_source_select' onClick="reply_click(this.id)">Sarah's PC</button>
+  <button class='btn btn-primary btn-lg active' id='tv_hdmi_2' onClick="reply_click(this.id)">Switch</button>
   <hr />
   <h3>Soundbar Volume Control</h3>
   <button class='btn btn-primary btn-lg active' id='soundbar_vol_mute' onClick="reply_click(this.id)">
@@ -232,14 +233,21 @@
     Off
   </button>
   <br>
-  <input type="range" class="form-range" min="0" max="254" step = "1" id="brightness_range" onClick="hue(this.id, this.value)">
-
+  <input type="range" class="form-range" min="0" max="254" step = "1" id="brightness_range" onClick="hue(this.id, this.value)" style="width: 50%">
+  <br>
+  <input type="color" id="color_range" name="color_range" value="#FFFFFF" onChange="hue(this.id, this.value)" />
   <script type=text/javascript>
     function reply_click(clicked_id) {
       $.post("/living_room_join_handler?button=" + clicked_id);
     }
     function hue(clicked_id, clicked_value) {
-      if(clicked_value)
+      if(clicked_id == "color_range")
+      {
+        console.log("/hue?color=" + clicked_value);
+        $.post("/hue?color=" + clicked_value.substring(1));
+        return;
+      }
+      if(clicked_id == "brightness_range")
       {
         $.post("/hue?brightness=" + clicked_value);
         return;

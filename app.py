@@ -51,6 +51,10 @@ def hue():
     if(request.args.get("brightness")):
         brightness = int(request.args.get("brightness"))
         living_room_group.set_brightness(brightness)
+    if(request.args.get("color")):
+        color = request.args.get("color")
+        print(color)
+        living_room_group.set_color(hexa=color)
     if(button_data=="living_room_off"):
         living_room_group.off()
     if(button_data=="living_room_on"):
