@@ -237,8 +237,20 @@
   <br>
   <input type="color" id="color_range" name="color_range" value="#FFFFFF" onChange="hue(this.id, this.value)" />
   <script type=text/javascript>
+    function hue_status_sync() {
+      fetch("/hue?status")
+          .then(response => response.json())
+          .then(data => {
+              document.getElementById('color_range').value = data.hue;
+              document.getElementById('brightness_range').value = data.brightness;
+          })
+    }
+    const interval = setInterval(function() {
+   hue_status_sync();
+ }, 5000);
     function reply_click(clicked_id) {
       $.post("/living_room_join_handler?button=" + clicked_id);
+
     }
     function hue(clicked_id, clicked_value) {
       if(clicked_id == "color_range")
