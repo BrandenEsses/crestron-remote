@@ -26,9 +26,49 @@
           <a class="nav-item nav-link" href="/guacamole">Guacamole</a>
         </div>
       </div>
+        <span class="ms-auto navbar-brand" id="clock">
+          <!-- The time will be inserted here by JavaScript -->
+        </span>
       </div>
     </nav>
     {% block content %}
     {% endblock %}
   </body>
+
+   <script>
+    function updateClock() {
+      const clockElement = document.getElementById('clock');
+      const now = new Date();
+
+      // Arrays for day and month names
+      const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const monthsOfYear = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+
+      // Extracting date components
+      const dayOfWeek = daysOfWeek[now.getDay()];
+      const month = monthsOfYear[now.getMonth()];
+      const dayOfMonth = now.getDate();
+      const year = now.getFullYear();
+
+      // Extracting time components
+      const hours = now.getHours().toString().padStart(2, '0'); // 24-hour format
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+
+      // Formatting date and time
+      const formattedDate = `${dayOfWeek}, ${month} ${dayOfMonth}, ${year}`;
+      const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+      // Displaying the date and time
+      clockElement.textContent = `${formattedDate} — ${formattedTime}`;
+    }
+
+// Update the clock immediately and then every minute
+updateClock();
+setInterval(updateClock, 1000); // Update every minute
+// If you want to update every second, change 1000 * 60 to 1000
+</script>
 </html>

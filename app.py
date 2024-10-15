@@ -97,7 +97,7 @@ def hue():
         living_room_group.off()
     if(button_data=="living_room_on"):
         living_room_group.on()
-        living_room_group.set_color(hexa="#F7FFC6")
+        living_room_group.set_color(hexa="#FFE68A")
         living_room_group.set_brightness(254)
     return ("nothing")
 
