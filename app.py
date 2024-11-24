@@ -2,9 +2,11 @@ from flask import Flask, render_template, request, jsonify
 import cipclient,time,os
 from config import *
 from huesdk import Hue
+from adb_shell.adb_device import AdbDeviceTcp
+from adb_shell.auth.sign_pythonrsa import PythonRSASigner
+from adb_shell.auth.keygen import keygen
 
 app = Flask(__name__, template_folder='templates')
-
 
 def hsv_to_rgb(H, S, V):
     C = V * S  # Chroma
@@ -43,9 +45,23 @@ def init_crestron_connection():
     living_room_cip.start()
     time.sleep(1.5)
 
+def init_chromecast_adb():
+    global device
+    if not os.path.isfile(ADB_KEY_PATH):
+        keygen(ADB_KEY_PATH)
+    time.sleep(1.5)
+    with open(ADB_KEY_PATH) as f:
+        priv = f.read()
+    with open(ADB_KEY_PATH + '.pub') as f:
+        pub = f.read()
+    signer = PythonRSASigner(pub, priv)
+    device = AdbDeviceTcp(CHROMECAST_IP, CHROMECAST_ADB_PORT, default_transport_timeout_s=9.)
+    device.connect(rsa_keys=[signer], auth_timeout_s=0.1)
+
 with app.app_context():
     init_crestron_connection()
     init_hue_sdk()
+    init_chromecast_adb()
 
 @app.route('/')
 def index():
@@ -62,6 +78,12 @@ def bedroom():
 @app.route('/living_room_join_handler', methods = ['POST'])
 def living_room_join_handler():
     button_data = request.args.get("button")
+    print(button_data)
+    if("adb" in button_data):
+        button_code = JOIN_DICT[button_data]
+        device.shell('input keyevent "KEYCODE_POWER"')
+        device.shell(f'input keyevent "{button_code}"')
+        return ("nothing")
     button_join = JOIN_DICT[button_data]
     living_room_cip.pulse(button_join)
     return ("nothing")

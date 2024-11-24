@@ -1,6 +1,38 @@
 {% extends "layout/page.html" %}
 {% block title %}Living Room{% endblock %}
 {% block content %}
+<head>
+    <script type=text/javascript>
+    function hue_status_sync() {
+      fetch("/hue?status")
+          .then(response => response.json())
+          .then(data => {
+              document.getElementById('color_range').value = data.hue;
+              document.getElementById('brightness_range').value = data.brightness;
+          })
+    }
+    const interval = setInterval(function() {
+   hue_status_sync();
+ }, 5000);
+function reply_click(clicked_id) {
+      $.post("/living_room_join_handler?button=" + clicked_id);
+  }
+    function hue(clicked_id, clicked_value) {
+      if(clicked_id == "color_range")
+      {
+        console.log("/hue?color=" + clicked_value);
+        $.post("/hue?color=" + clicked_value.substring(1));
+        return;
+      }
+      if(clicked_id == "brightness_range")
+      {
+        $.post("/hue?brightness=" + clicked_value);
+        return;
+      }
+      $.post("/hue?button=" + clicked_id);
+    }
+  </script>
+</head>
 <div class='container-fluid shadow-lg p-3 mb-5 rounded'>
   <h1>Living Room</h1>
   <hr />
@@ -39,33 +71,33 @@
           </button>
         </div>
         <div class="modal-body text-center">
-          <button class='btn btn-primary btn-lg active' id='chromecast_home' onClick="reply_click(this.id)">
+          <button class='btn btn-primary btn-lg active' id='adb_chromecast_home' onClick="reply_click(this.id)">
             <i class="bi bi-house-fill"></i>
           </button>
-          <button class='btn btn-primary btn-lg active' id='chromecast_back' onClick="reply_click(this.id)">
+          <button class='btn btn-primary btn-lg active' id='adb_chromecast_back' onClick="reply_click(this.id)">
             <i class="bi bi-arrow-return-left"></i>
           </button>
-          <button class='btn btn-primary btn-lg active' id='chromecast_play_pause' onClick="reply_click(this.id)">
+          <button class='btn btn-primary btn-lg active' id='adb_chromecast_play_pause' onClick="reply_click(this.id)">
             <i class="bi bi-play-fill"></i>
             <i class="bi bi-pause-fill"></i>
           </button>
           <br>
           <hr/>
-          <button class='btn btn-primary btn-lg active' id='chromecast_up' onClick="reply_click(this.id)">
+          <button class='btn btn-primary btn-lg active' id='adb_chromecast_up' onClick="reply_click(this.id)">
             <i class="bi bi-arrow-up"></i>
           </button>
           <br>
-          <button class='btn btn-primary btn-lg active' id='chromecast_left' onClick="reply_click(this.id)">
+          <button class='btn btn-primary btn-lg active' id='adb_chromecast_left' onClick="reply_click(this.id)">
             <i class="bi bi-arrow-left"></i>
           </button>
-          <button class='btn btn-primary btn-lg active' id='chromecast_select' onClick="reply_click(this.id)">
+          <button class='btn btn-primary btn-lg active' id='adb_chromecast_select' onClick="reply_click(this.id)">
             <i class="bi bi-record-fill"></i>
           </button>
-          <button class='btn btn-primary btn-lg active' id='chromecast_right' onClick="reply_click(this.id)">
+          <button class='btn btn-primary btn-lg active' id='adb_chromecast_right' onClick="reply_click(this.id)">
             <i class="bi bi-arrow-right"></i>
           </button>
           <br>
-          <button class='btn btn-primary btn-lg active' id='chromecast_down' onClick="reply_click(this.id)">
+          <button class='btn btn-primary btn-lg active' id='adb_chromecast_down' onClick="reply_click(this.id)">
             <i class="bi bi-arrow-down"></i>
           </button>
           <br>
@@ -236,35 +268,5 @@
   <input type="range" class="form-range" min="0" max="254" step = "1" id="brightness_range" onChange="hue(this.id, this.value)" style="width: 75%">
   <br>
   <input type="color" id="color_range" name="color_range" value="#FFFFFF" onChange="hue(this.id, this.value)" />
-  <script type=text/javascript>
-    function hue_status_sync() {
-      fetch("/hue?status")
-          .then(response => response.json())
-          .then(data => {
-              document.getElementById('color_range').value = data.hue;
-              document.getElementById('brightness_range').value = data.brightness;
-          })
-    }
-    const interval = setInterval(function() {
-   hue_status_sync();
- }, 5000);
-    function reply_click(clicked_id) {
-      $.post("/living_room_join_handler?button=" + clicked_id);
-
-    }
-    function hue(clicked_id, clicked_value) {
-      if(clicked_id == "color_range")
-      {
-        console.log("/hue?color=" + clicked_value);
-        $.post("/hue?color=" + clicked_value.substring(1));
-        return;
-      }
-      if(clicked_id == "brightness_range")
-      {
-        $.post("/hue?brightness=" + clicked_value);
-        return;
-      }
-      $.post("/hue?button=" + clicked_id);
-    }
-  </script>
+</div>
   {% endblock %}
