@@ -81,7 +81,7 @@ def living_room_join_handler():
     print(button_data)
     if("adb" in button_data):
         button_code = JOIN_DICT[button_data]
-        device.shell('input keyevent "KEYCODE_POWER"')
+        device.shell('input keyevent "KEYCODE_WAKEUP"')
         device.shell(f'input keyevent "{button_code}"')
         return ("nothing")
     button_join = JOIN_DICT[button_data]
