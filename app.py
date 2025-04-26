@@ -119,8 +119,15 @@ def hue():
         living_room_group.off()
     if(button_data=="living_room_on"):
         living_room_group.on()
-        living_room_group.set_color(hexa="#FFE68A")
+        living_room_group.set_color(hexa="#f7cf3e")
         living_room_group.set_brightness(254)
+    if(button_data=="living_room_toggle"):
+        if living_room_group.is_on():
+            living_room_group.off()
+        else:
+            living_room_group.set_color(hexa="#f7cf3e")
+            living_room_group.set_brightness(254)
+            
     return ("nothing")
 
 @app.route('/guacamole', methods = ['GET','POST'])
