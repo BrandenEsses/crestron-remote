@@ -118,10 +118,10 @@ def hue():
     if(button_data=="living_room_off"):
         living_room_group.off()
     if(button_data=="living_room_on"):
-            living_room_group.on()
             living_room_group.set_color(hue = 8632)
             living_room_group.set_brightness(254)
             living_room_group.set_saturation(117)
+            living_room_group.on()
     if(button_data=="living_room_toggle"):
         current_bri = light.__getattribute__("bri")
         current_hue = light.__getattribute__("hue")
@@ -130,10 +130,10 @@ def hue():
         if living_room_group.is_on:
             living_room_group.off()
         else:
-            living_room_group.on()
             living_room_group.set_color(hue = 8632)
             living_room_group.set_brightness(254)
             living_room_group.set_saturation(117)
+            living_room_group.on()
             
     return ("nothing")
 
