@@ -121,7 +121,7 @@ def hue():
             living_room_group.on()
             living_room_group.set_color(hue = 8632)
             living_room_group.set_brightness(254)
-            living_room_group.set_saturation(saturation=117)
+            living_room_group.set_saturation(117)
     if(button_data=="living_room_toggle"):
         current_bri = light.__getattribute__("bri")
         current_hue = light.__getattribute__("hue")
@@ -133,7 +133,7 @@ def hue():
             living_room_group.on()
             living_room_group.set_color(hue = 8632)
             living_room_group.set_brightness(254)
-            living_room_group.set_saturation(saturation=117)
+            living_room_group.set_saturation(117)
             
     return ("nothing")
 
