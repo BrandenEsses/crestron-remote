@@ -118,15 +118,22 @@ def hue():
     if(button_data=="living_room_off"):
         living_room_group.off()
     if(button_data=="living_room_on"):
-        living_room_group.on()
-        living_room_group.set_color(hexa="#f7cf3e")
-        living_room_group.set_brightness(254)
+            living_room_group.on()
+            living_room_group.set_color(hue = 8632)
+            living_room_group.set_brightness(254)
+            living_room_group.set_saturation(saturation=117)
     if(button_data=="living_room_toggle"):
-        if living_room_group.is_on():
+        current_bri = light.__getattribute__("bri")
+        current_hue = light.__getattribute__("hue")
+        current_sat = light.__getattribute__("sat")
+        print(current_bri, current_hue, current_sat)
+        if living_room_group.is_on:
             living_room_group.off()
         else:
-            living_room_group.set_color(hexa="#f7cf3e")
+            living_room_group.on()
+            living_room_group.set_color(hue = 8632)
             living_room_group.set_brightness(254)
+            living_room_group.set_saturation(saturation=117)
             
     return ("nothing")
 
