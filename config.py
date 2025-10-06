@@ -26,7 +26,7 @@ JOIN_DICT = {
     'tv_play_pause' : 20,
     'tv_back' : 50,
     'apple_tv_source_select' : 6,
-    # 'chromecast_source_select' : 5,
+    'chromecast_source_select' : 5,
     'branden_desktop_source_select' : 4,
     # 'server_source_select' : 3,
     'sarah_pc_source_select' : 3,
